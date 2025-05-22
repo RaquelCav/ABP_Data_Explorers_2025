@@ -52,14 +52,15 @@ while True:
                 nombre_cliente = input("Nombre: ")
                 apellido_cliente = input("Apellido: ")
                 dni_cliente = input("DNI: ")
-                fecha_nacimiento_cliente = input("Fecha de nacimiento: ")
-                telefono_cliente = input("Teléfono: ")
+                fecha_nac_cliente = input("Fecha de nacimiento: ")
+                tel_cliente = input("Teléfono: ")
                 correo_cliente = input("Correo: ")
                 nacionalidad_cliente = input("Nacionalidad: ")
+                print(f'El cliente {nombre_cliente} {apellido_cliente} {dni_cliente} {fecha_nac_cliente} {tel_cliente} {correo_cliente} {nacionalidad_cliente} fue ingresado correctamente')
             elif opcion_tipo_cliente == "2":
                 razon_social_empresa = input("Razón social: ")
                 cuit_empresa = input("CUIT: ")
-                telefono_empresa = input("Teléfono: ")
+                tel_empresa = input("Teléfono: ")
                 correo_empresa = input("Correo electrónico: ")
             else:
                 print("Opción inválida, por favor seleccione una opción válida.")
