@@ -23,6 +23,13 @@ Integrantes del grupo:
 
 """
 
+##################################################################################################################################################################
+        # AGREGAR COMENTARIOS
+        ##########################################################################################################################################################
+
+
+
+
 print("Bienvenidos a SkyRoute S.R.L. Booking System")
 
 while True:
@@ -52,14 +59,14 @@ while True:
             
             if opcion_ver_cliente == 1:
                 print("Seleccionar:")
-                print("1. Consulta de cliente individual")
+                print("1. Consulta de cliente particular")
                 print("2. Consulta de cliente empresa")
-                ver_ind_o_emp = int(input("Indicar el tipo de cliente que desea consultar: "))
+                ver_part_o_emp = int(input("Indicar el tipo de cliente que desea consultar: "))
                 
-                if ver_ind_o_emp == 1:
+                if ver_part_o_emp == 1:
                     consulta_cliente_ind = input("Ingrese el DNI del cliente: ")
                     print(f"Se consultará la base de datos para obtener la información del cliente solicitado {consulta_cliente_ind}")
-                elif ver_ind_o_emp == 2:
+                elif ver_part_o_emp == 2:
                     consulta_cliente_emp = input("Ingrese el CUIT de la empresa: ")
                     print(f"Se consultará la base de datos para obtener la información del cliente solicitado {consulta_cliente_emp}")
                 else:
@@ -74,7 +81,7 @@ while True:
         
         elif opcion_gestion_clientes == 2:
             print("Seleccionar:")
-            print("1. Cliente individual")
+            print("1. Cliente particular")
             print("2. Cliente empresa")
             print("3. Regresar al menú principal")
             opcion_tipo_cliente = int(input("Seleccione el tipo de cliente: "))
@@ -110,20 +117,20 @@ while True:
         
         elif opcion_gestion_clientes == 3:
             print("Seleccionar:")
-            print("1. Modificar cliente individual")
+            print("1. Modificar cliente particular")
             print("2. Modificar cliente empresa")
             print("3. Regresar al menú principal")
-            modif_ind_o_emp = int(input("Indicar el tipo de cliente que desea modificar: "))
+            modif_part_o_emp = int(input("Indicar el tipo de cliente que desea modificar: "))
             
-            if modif_ind_o_emp == 1:
+            if modif_part_o_emp == 1:
                 modif_cliente_ind = input("Ingrese el DNI del cliente: ")
                 # Se debe solicitar al usuario el tipo de información a cambiar y el nuevo valor
                 print("La información ha sido actualizada correctamente")
-            elif modif_ind_o_emp == 2:
+            elif modif_part_o_emp == 2:
                 modif_cliente_emp = input("Ingrese el CUIT de la empresa: ")
                 # Se debe solicitar al usuario el tipo de información a cambiar y el nuevo valor
                 print("La información ha sido actualizada correctamente")
-            elif modif_ind_o_emp == 3:
+            elif modif_part_o_emp == 3:
                 pass
             else:
                 print("Opción inválida, por favor seleccione una opción válida.")
@@ -133,17 +140,17 @@ while True:
             print("1. Eliminar cliente individual")
             print("2. Eliminar cliente empresa")
             print("3. Regresar al menú principal")
-            eliminar_ind_o_emp = int(input("Indicar el tipo de cliente que desea eliminar: "))
+            eliminar_part_o_emp = int(input("Indicar el tipo de cliente que desea eliminar: "))
 
-            if eliminar_ind_o_emp == 1:
+            if eliminar_part_o_emp == 1:
                 eliminar_cliente_ind = input("Ingrese el DNI del cliente: ")
                 # Se debe preguntar al usuario si está seguro de eliminar la información
                 print("La eliminación del cliente se realizó con éxito")
-            elif eliminar_ind_o_emp == 2:
+            elif eliminar_part_o_emp == 2:
                 eliminar_cliente_emp = input("Ingrese el CUIT del cliente: ")
                 # Se debe preguntar al usuario si está seguro de eliminar la información
                 print("La eliminación del cliente se realizó con éxito")
-            elif eliminar_ind_o_emp == 3:
+            elif eliminar_part_o_emp == 3:
                 pass
             else:
                 print("Opción inválida, por favor seleccione una opción válida.")
@@ -201,24 +208,25 @@ while True:
                de arrepentimiento. En el caso de la empresa SkyRoute S.R.L., deberá determinar los plazos
                en que se permitirá este arrepentimiento de compra, según las regulaciones de las diferentes
                aerolíneas con las que trabaja o los acuerdos que con las mismas realice. A continuación, 
-              podrá visualizar las ventas anuladas conforme a lo establecido en la legislación mencionada.""")
+              podrá visualizar las ventas de pasajes anuladas conforme a lo establecido en la legislación 
+              mencionada.""")
         print("Seleccionar:")
-        print("1. Anular venta")
-        print("2. Ver una venta anulada")
-        print("3. Ver listado de ventas anuladas")
+        print("1. Anular pasaje")
+        print("2. Ver una venta de pasaje anulada")
+        print("3. Ver listado de ventas de pasajes anuladas")
         print("4. Regresar al menú principal")        
-        opcion_ver_ventas_anuladas = int(input("Indicar que información desea conocer: "))
+        opcion_ver_pasajes_anulados = int(input("Indicar que información desea conocer: "))
 
-        if opcion_ver_ventas_anuladas == 1:
-            boton_arrepentimiento = input("Ingresar el ID de la venta a anular: ")
-            # Se debe verificar en la base de datos el ID de la venta ingresado y comprobar que el tiempo transcurrido entre la fecha de compra del pasaje y la solicitud de anulación no exceda el plazo establecido por la empresa y por la normativa vigente.
-            # En caso de corresponder, el estado de la venta se debe cambiar de "Activa" a "Anulada" en la base de datos.
-        elif opcion_ver_ventas_anuladas == 2:
-            ver_venta_anulada = int(input("Indicar el ID de la venta que desea consultar: "))
-            # Se debe buscar el ID de la venta ingresada en la base de datos.
-        elif opcion_ver_ventas_anuladas == 3:
-            print("Se consultará a la base de datos para obtener el listado completo de ventas anuladas.")
-        elif opcion_ver_ventas_anuladas == 4:
+        if opcion_ver_pasajes_anulados == 1:
+            boton_arrepentimiento = input("Ingresar el ID del pasaje a anular: ")
+            # Se debe verificar en la base de datos el ID del pasaje ingresado y comprobar que el tiempo transcurrido entre la fecha de compra del pasaje y la solicitud de anulación no exceda el plazo establecido por la empresa y por la normativa vigente.
+            # En caso de corresponder, el estado de la venta para ese pasaje debe cambiar de "Activa" a "Anulada" en la base de datos.
+        elif opcion_ver_pasajes_anulados == 2:
+            ver_venta_anulada = int(input("Indicar el ID de anulación que desea consultar: "))
+            # Se debe buscar el ID de anulación ingresada en la base de datos.
+        elif opcion_ver_pasajes_anulados == 3:
+            print("Se consultará a la base de datos para obtener el listado completo de pasajes anulados.")
+        elif opcion_ver_pasajes_anulados == 4:
             pass
         else:
             print("Opción inválida, por favor seleccione una opción válida.")
