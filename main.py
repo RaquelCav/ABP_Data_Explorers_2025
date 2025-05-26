@@ -280,7 +280,6 @@ while True:
     # Se plantea un submenú resultante de elegir la opción "Botón de arrepentimiento":
         
     elif opcion_menu_principal == 4:
-        print("A continuación, podrá visualizar las ventas de pasajes anuladas conforme a lo establecido en la legislación mencionada.")
         print("Seleccionar:")
         print("1. Anular pasaje") 
         # Se considera importante que la empresa cuente con el recurso de anular una operación de compra de pasaje, en el caso de que el cliente no pueda hacerlo.
@@ -291,10 +290,8 @@ while True:
 
         if opcion_ver_pasajes_anulados == 1:
             boton_arrepentimiento = int(input("Ingresar el id del pasaje a anular: "))
-            print("La cancelación del pasaje se ha realizado con éxito.")
-            # Se debe verificar en la base de datos el id del pasaje ingresado, y comprobar que el tiempo transcurrido entre la fecha 
-            # de compra del pasaje y la solicitud de anulación no exceda el plazo establecido de los 60 días hábiles.
-            # En caso de corresponder, el estado de la venta para ese pasaje debe cambiar de "Activo" a "Anulado" en la base de datos.
+            print("La cancelación del pasaje se ha realizado con éxito. La devolución del dinero se efectuará en el plazo de 60 días.")
+            # El estado de la venta para ese pasaje debe cambiar de "Activo" a "Anulado" en la base de datos.
         elif opcion_ver_pasajes_anulados == 2:
             ver_venta_anulada = int(input("Indicar el id de anulación que desea consultar: "))
             print(f"Se consultará la base de datos para obtener la información de la venta anulada {ver_venta_anulada}.")
