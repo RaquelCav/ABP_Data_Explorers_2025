@@ -9,7 +9,16 @@ registro de clientes y la administración de destinos disponibles. Además, ofre
 usuarios la posibilidad de anular una compra dentro de un período limitado de tiempo desde 
 su realización, a través de la funcionalidad específica del botón de arrepentimiento.
 
-(como instalar y ejecutar el programa)
+¿Cómo instalar y ejecutar el programa?
+
+Para ejecutar este programa, es necesario tener instalado Python. Si no lo posee, puede descargarlo desde el sitio oficial: https://www.python.org/downloads/ 
+
+Pasos para ejecutar el programa:
+
+1. Descargar en su computadora el archivo main.py que contiene el programa.
+2. Localizar la carpeta donde se encuentra almacenado el archivo, posicionarse sobre él, y hacer clic derecho.
+3. Una vez desplegado el menú de opciones, seleccionar en Abrir con > Python.
+4. Comenzará la ejecución del programa en consola, guiando al usuario mediante opciones en pantalla.
 
 Integrantes del grupo:
 
