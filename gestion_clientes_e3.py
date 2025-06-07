@@ -1,4 +1,4 @@
-skyroute_booking_system={}
+skyroute_clientes={}
 
 def menu_gestion_clientes():
     print("\nSeleccionar:")
@@ -29,20 +29,20 @@ def agregar_nuevo_cliente():
             "Nombre": nombre_cliente,
             "Apellido": apellido_cliente,
             "DNI": dni_cliente,
+            "Nacionalidad": nacionalidad_cliente,
             "Fecha de nacimiento": fecha_nac_cliente,
             "Teléfono": tel_cliente,
             "Correo electrónico": correo_cliente,
-            "Nacionalidad": nacionalidad_cliente
         }
 
-        skyroute_booking_system[dni_cliente] = cliente_particular
+        skyroute_clientes[dni_cliente] = cliente_particular
 
         print(f"El cliente {nombre_cliente} {apellido_cliente}") 
         print(f"DNI: {dni_cliente}")
+        print(f"Nacionalidad: {nacionalidad_cliente}")
         print(f"Fecha de nacimiento: {fecha_nac_cliente}")
         print(f"Tel.: {tel_cliente}")
         print(f"Correo: {correo_cliente}")
-        print(f"Nacionalidad: {nacionalidad_cliente}")
         print("fue ingresado correctamente.")
     
     elif opcion_tipo_cliente == 2:
@@ -59,7 +59,7 @@ def agregar_nuevo_cliente():
             "Correo electrónico de la empresa": correo_empresa
         }
 
-        skyroute_booking_system[cuit_empresa] = cliente_empresa
+        skyroute_clientes[cuit_empresa] = cliente_empresa
         
         print(f"La empresa {razon_social_empresa}")
         print(f"CUIT: {cuit_empresa}")
@@ -90,8 +90,8 @@ def ver_clientes():
         if ver_part_o_emp == 1:  
             dni_cliente = input("\nIngrese el DNI del cliente: ") 
 
-            if dni_cliente in skyroute_booking_system:
-                cliente_particular = skyroute_booking_system[dni_cliente]
+            if dni_cliente in skyroute_clientes:
+                cliente_particular = skyroute_clientes[dni_cliente]
                 print("\nDatos del cliente particular ingresado:")
                 print(cliente_particular)
             else:
@@ -100,8 +100,8 @@ def ver_clientes():
         elif ver_part_o_emp == 2:
             cuit_empresa = input("\nIngrese el CUIT de la empresa: ")
 
-            if cuit_empresa in skyroute_booking_system:
-                cliente_empresa = skyroute_booking_system[cuit_empresa]
+            if cuit_empresa in skyroute_clientes:
+                cliente_empresa = skyroute_clientes[cuit_empresa]
                 print("\nDatos del cliente empresa ingresado:")
                 print(cliente_empresa)
             else:
@@ -126,8 +126,8 @@ def modificar_cliente():
     if modif_part_o_emp == 1:
         dni_cliente = input("\nIngrese el DNI del cliente: ")
         
-        if dni_cliente in skyroute_booking_system:
-            cliente_particular = skyroute_booking_system[dni_cliente]
+        if dni_cliente in skyroute_clientes:
+            cliente_particular = skyroute_clientes[dni_cliente]
             print("\nDatos del cliente particular ingresado:")
             print(cliente_particular)
             
@@ -151,8 +151,8 @@ def modificar_cliente():
     elif modif_part_o_emp == 2:
         cuit_empresa = input("\nIngrese el CUIT de la empresa: ")
     
-        if cuit_empresa in skyroute_booking_system:
-            cliente_empresa = skyroute_booking_system[cuit_empresa]
+        if cuit_empresa in skyroute_clientes:
+            cliente_empresa = skyroute_clientes[cuit_empresa]
             print("\nDatos del cliente empresa ingresado:")
             print(cliente_empresa)
             
@@ -189,10 +189,10 @@ def eliminar_cliente():
     if eliminar_part_o_emp == 1:
         dni_cliente = input("Ingrese el DNI del cliente particular que desea eliminar: ")
 
-        if dni_cliente in skyroute_booking_system:
+        if dni_cliente in skyroute_clientes:
             eliminacion = input("¿Está seguro de que desea eliminar el cliente (si/no)?: ")
             if eliminacion.lower() == "si":
-                del skyroute_booking_system[dni_cliente]
+                del skyroute_clientes[dni_cliente]
                 print("La eliminación del cliente particular se realizó con éxito.")
             else:
                 print("No se realizaron eliminaciones.")
@@ -202,10 +202,10 @@ def eliminar_cliente():
     elif eliminar_part_o_emp == 2:
         cuit_empresa = input("Ingrese el CUIT del cliente empresa que desea eliminar: ")
 
-        if cuit_empresa in skyroute_booking_system:
+        if cuit_empresa in skyroute_clientes:
             eliminacion = input("¿Está seguro de que desea eliminar el cliente (si/no)?: ")
             if eliminacion.lower() == "si":
-                del skyroute_booking_system[cuit_empresa]
+                del skyroute_clientes[cuit_empresa]
                 print("La eliminación del cliente empresa se realizó con éxito.")
             else:
                 print("No se realizaron eliminaciones.")
