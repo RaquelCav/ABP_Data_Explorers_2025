@@ -3,8 +3,8 @@ skyroute_destinos={}
 def menu_gestion_destinos():
     print("\nSeleccionar:")
     print("1. Registrar destino")
-    print("2. Listar destinos")
-    print("3. Modificar destino")
+    print("2. Listar destinos") # Consulta SQL. SELECT *.
+    print("3. Modificar destino") # Consulta SQL. INSERT INTO (modificación)
     print("4. Eliminar destino")
     print("5. Registrar aeropuerto")
     print("6. Registrar aerolínea")
@@ -16,7 +16,9 @@ def registrar_destino():
     codigo_iata_origen = input("Código IATA origen: ")
     codigo_iata_destino = input("Código IATA destino: ")
     costo_base = float(input("Costo base: "))
-    id_trayecto = "" # Sacar comillas después. Definir acá si será un input o si lo traerá como info de la base de datos
+    
+    #Primero se insertan los datos en la BD.
+    id_trayecto = "" # Una consulta SQL traerá el dato.
                 
     destino = {
         "ID trayecto": id_trayecto,
@@ -96,7 +98,9 @@ def registrar_aeropuerto():
 def registrar_aerolínea():
     print("Por favor, ingrese los siguientes datos para registrar una nueva aerolínea:")
     nombre_aerolinea = input("Nombre de la aerolínea: ")
-    id_aerolinea = "" # Sacar comillas después. Definir acá si será un input o si lo traerá como info de la base de datos
+    
+    # Primero se insertan los datos en la BD.
+    id_aerolinea = "" # Una consulta SQL traerá el dato.
                 
     aerolinea = {
         "ID aerolínea": id_aerolinea,
@@ -111,13 +115,14 @@ def registrar_aerolínea():
     
 def registrar_vuelo():
     print("Por favor, ingrese los siguientes datos para registrar un nuevo vuelo:")
-    id_vuelo = "" # Sacar comillas después. Definir acá si será un input o si lo traerá como info de la base de datos
+    # Hacer un insert into y traer el id_vuelo desde la BD.
+    id_vuelo = "" #Sacar comiilas después
     fecha_salida = input("Fecha de salida del vuelo: ")
     hora_salida = input("Hora de salida del vuelo: ")
     fecha_llegada = input("Fecha de llegada del vuelo: ")
     hora_llegada =  input("Hora de llegada del vuelo: ")
     id_trayecto = input("Ingrese el ID trayecto: ")
-    id_aerolinea = input ("Inngrese el ID aerolínea: ")
+    id_aerolinea = input ("Ingrese el ID aerolínea: ")
                 
     vuelo = {
         "ID vuelo": id_vuelo,

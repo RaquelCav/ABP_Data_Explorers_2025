@@ -10,7 +10,7 @@ def menu_gestion_clientes():
 
 def agregar_nuevo_cliente():
     print("\nSeleccionar:")
-    print("1. Cliente particular")
+    print("1. Cliente particular") # Consulta SQL. INSERT INTO (puede ser con cliente particular o ambos)
     print("2. Cliente empresa")
     print("3. Regresar al menú principal")
     opcion_tipo_cliente = int(input("\nSeleccione una opción: "))
@@ -77,7 +77,7 @@ def agregar_nuevo_cliente():
 def ver_clientes():
     print("\nSeleccionar:")
     print("1. Ver un cliente")
-    print("2. Ver listado de clientes")
+    print("2. Ver listado de clientes") # Consulta SQL SELECT *.
     print("3. Regresar al menú principal")
     opcion_ver_cliente = int(input("\nIndicar qué información desea conocer: "))
 
@@ -181,7 +181,7 @@ def modificar_cliente():
 
 def eliminar_cliente():
     print("Seleccionar:")
-    print("1. Eliminar cliente particular")
+    print("1. Eliminar cliente particular") # Consulta SQL DELETE.
     print("2. Eliminar cliente empresa")
     print("3. Regresar al menú principal")
     eliminar_part_o_emp = int(input("Indicar el tipo de cliente que desea eliminar: "))

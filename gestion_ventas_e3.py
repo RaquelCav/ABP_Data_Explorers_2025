@@ -13,16 +13,18 @@ def menu_gestion_ventas():
 
 def registrar_venta():
     print("\nIngrese los datos correspondientes al nuevo pasaje. Recuerde que cada venta se asocia a un único pasaje: ")
-    id_pasaje = "" # Sacar comillas después. Definir acá si será un input o si lo traerá como info de la base de datos
     clase = input("Clase del pasaje: ")
     num_asiento = input("Número de asiento: ")
     id_cliente = int(input("ID cliente: "))
     id_vuelo = input("ID vuelo: ")
-    id_venta = "" # Sacar comillas después. Se deberá traer la info del atributo "costo base", de la tabla "Trayecto"
+    id_metodo_pago = input("Método de pago: ")
+
+    #  Hacer el INSERT INTO Y DESPUES LLAMAR A LOS SIGUIENTES DATOS CON UN SELECT.
+    id_venta = "" # Sacar comillas después. 
     fecha_venta = "" # "Fecha venta": no se pide ingreso de datos, ya que se le asigna por defecto la fecha del día que se hizo la venta.
     estado_venta = "" # "Estado de la venta": no se pide ingreso de datos, ya que, al registrarse una nueva venta, se le asigna por defecto el estado "Activo".
     precio_final = "" # Sacar comillas después. Se deberá traer la info del atributo "costo base", de la tabla "Trayecto"
-    id_metodo_pago = input("Método de pago: ")
+    id_pasaje = "" # Sacar comillas después.
 
     venta =  {
         "ID venta": id_venta,
@@ -51,7 +53,7 @@ def registrar_venta():
     print(f"con número de asiento {num_asiento}, correspondiente al vuelo {id_vuelo},")
     print(f"pertenece al cliente {id_cliente}.")
     print(f"Esta operación fue efectuada el {fecha_venta}, por un valor de $ {precio_final}")
-    print(f"abonado bajo el método de pago {nombre_metodo}.")
+    print(f"abonado bajo el método de pago {id_metodo_pago}.")
     print(f"El estado de esta venta es {estado_venta}.")        
 
 
@@ -59,8 +61,8 @@ def ver_ventas():
     print("\nSeleccionar:")
     print("1. Filtrar por cliente")
     print("2. Filtrar por destino")
-    print("3. Filtrar por estado de venta")
-    print("4. Ver listado completo")
+    print("3. Filtrar por estado de venta") # Consulta SQl. Consulta multitabla? O con filtros?
+    print("4. Ver listado completo") # Consulta SQL SELECT *
     filtrar_ventas = int(input("Indique que acción desea realizar: "))
 
     if filtrar_ventas == 1:
@@ -96,7 +98,7 @@ def registrar_metodo_pago():
 
 def boton_arrepentimiento():
     print("\nSeleccionar:")
-    print("1. Anular venta") 
+    print("1. Anular venta") # Consulta SQL SELECT con el ID de la venta
     print("2. Regresar al menú principal")      
     opcion_arrepentimiento = int(input("Indique qué acción desea realizar: "))
 
@@ -105,7 +107,7 @@ def boton_arrepentimiento():
         print("\nEl detalle de la venta ingresada es el siguiente:")
         for clave, valor in skyroute_ventas[id_venta].items():
             print(f"{clave}: {valor}")
-        # Opción B: también se puede plantear una operación SQL que traiga la info de la venta a anular.
+        # Consulta SQL SELECT con el ID de la venta
                         
 
         if id_venta in skyroute_ventas[id_venta]:
