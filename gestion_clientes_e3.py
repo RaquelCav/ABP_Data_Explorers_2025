@@ -1,4 +1,9 @@
+# Para el desarrollo de múltiples funcionalidades del programa, se planteó su resolución desde dos enfoques: por un
+# lado, utilizando estructuras de datos en Python, como ser diccionarios; y por el otro, mediante consultas SQL a 
+# través de una conexión a una base de datos MySQL, empleando la biblioteca mysql.connector.
+
 skyroute_clientes={}
+import conexion_base_datos
 
 def menu_gestion_clientes():
     print("\nSeleccionar:")
@@ -10,7 +15,7 @@ def menu_gestion_clientes():
 
 def agregar_nuevo_cliente():
     print("\nSeleccionar:")
-    print("1. Cliente particular") # Consulta SQL. INSERT INTO (puede ser con cliente particular o ambos)
+    print("1. Cliente particular")
     print("2. Cliente empresa")
     print("3. Regresar al menú principal")
     opcion_tipo_cliente = int(input("\nSeleccione una opción: "))
@@ -77,7 +82,7 @@ def agregar_nuevo_cliente():
 def ver_clientes():
     print("\nSeleccionar:")
     print("1. Ver un cliente")
-    print("2. Ver listado de clientes") # Consulta SQL SELECT *.
+    print("2. Ver listado de clientes")
     print("3. Regresar al menú principal")
     opcion_ver_cliente = int(input("\nIndicar qué información desea conocer: "))
 
@@ -109,8 +114,7 @@ def ver_clientes():
         else:
             print("Opción inválida, por favor seleccione una opción válida.")
     elif opcion_ver_cliente == 2:
-        # Esta opción de menú se resuelve con una sentencia SQL
-        pass
+        conexion_base_datos.consulta_listado_clientes()
     elif opcion_ver_cliente == 3:
         pass
     else:
@@ -181,17 +185,17 @@ def modificar_cliente():
 
 def eliminar_cliente():
     print("Seleccionar:")
-    print("1. Eliminar cliente particular") # Consulta SQL DELETE.
+    print("1. Eliminar cliente particular")
     print("2. Eliminar cliente empresa")
     print("3. Regresar al menú principal")
     eliminar_part_o_emp = int(input("Indicar el tipo de cliente que desea eliminar: "))
 
     if eliminar_part_o_emp == 1:
         dni_cliente = input("Ingrese el DNI del cliente particular que desea eliminar: ")
-
         if dni_cliente in skyroute_clientes:
             eliminacion = input("¿Está seguro de que desea eliminar el cliente (si/no)?: ")
             if eliminacion.lower() == "si":
+               
                 del skyroute_clientes[dni_cliente]
                 print("La eliminación del cliente particular se realizó con éxito.")
             else:
@@ -201,10 +205,10 @@ def eliminar_cliente():
     
     elif eliminar_part_o_emp == 2:
         cuit_empresa = input("Ingrese el CUIT del cliente empresa que desea eliminar: ")
-
         if cuit_empresa in skyroute_clientes:
             eliminacion = input("¿Está seguro de que desea eliminar el cliente (si/no)?: ")
             if eliminacion.lower() == "si":
+               
                 del skyroute_clientes[cuit_empresa]
                 print("La eliminación del cliente empresa se realizó con éxito.")
             else:

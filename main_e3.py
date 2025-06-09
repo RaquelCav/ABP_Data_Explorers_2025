@@ -1,3 +1,7 @@
+# © 2025 Grupo Data Explorers. Este software es parte del prototipo de sistema de gestión para SkyRoute S.R.L. Todos los derechos reservados.
+
+# Este es el archivo main.py del programa. En él, se invocan las funciones específicas de cada módulo, 
+# para lo cual se importan los archivos en los cuales fueron definidas.
 
 import menu_principal_e3
 import gestion_clientes_e3

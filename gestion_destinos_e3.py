@@ -1,10 +1,17 @@
 skyroute_destinos={}
+import conexion_base_datos
+
+# Se agregaron las opciones de registrar aeropuerto, aerolínea y vuelo para garantizar el ingreso de
+# datos a dichas tablas en la base de datos. Por cuestiones de tiempo, no se llegó a desarrollar las
+# funcionalidades de modificación, eliminación y listado de aeropuertos, aerolíneas y vuelos. Sin 
+# embargo, se reconoce como una mejora pendiente a implementar, con el objetivo de hacer el programa 
+# más completo y escalable a futuro.
 
 def menu_gestion_destinos():
     print("\nSeleccionar:")
     print("1. Registrar destino")
-    print("2. Listar destinos") # Consulta SQL. SELECT *.
-    print("3. Modificar destino") # Consulta SQL. INSERT INTO (modificación)
+    print("2. Listar destinos")
+    print("3. Modificar destino")
     print("4. Eliminar destino")
     print("5. Registrar aeropuerto")
     print("6. Registrar aerolínea")
@@ -16,25 +23,26 @@ def registrar_destino():
     codigo_iata_origen = input("Código IATA origen: ")
     codigo_iata_destino = input("Código IATA destino: ")
     costo_base = float(input("Costo base: "))
-    
-    #Primero se insertan los datos en la BD.
-    id_trayecto = "" # Una consulta SQL traerá el dato.
-                
-    destino = {
-        "ID trayecto": id_trayecto,
-        "Código IATA origen": codigo_iata_origen,
-        "Código IATA destino": codigo_iata_destino,
-        "Costo base": costo_base
-    }
+    id_trayecto = conexion_base_datos.ingresar_trayecto(codigo_iata_origen, codigo_iata_destino, costo_base)
 
-    skyroute_destinos[id_trayecto] = destino
+# Debido a que la consulta se resuelve mediante la conexión a la base de datos MySQL, el diccionario 
+# se conserva en el código como comentario.
 
-    print(f"El destino con origen en: {codigo_iata_origen}; llegada en: {codigo_iata_destino};") 
+#    destino = {
+#        "ID trayecto": id_trayecto,
+#        "Código IATA origen": codigo_iata_origen,
+#        "Código IATA destino": codigo_iata_destino,
+#        "Costo base": costo_base
+#    }
+
+#    skyroute_destinos[id_trayecto] = destino
+
+    print(f"El destino con ID {id_trayecto} con origen en: {codigo_iata_origen}; llegada en: {codigo_iata_destino};") 
     print(f"y costo base: {costo_base}")
     print("fue ingresado correctamente.")
     
 def listar_destinos():
-    pass # Sacar pass después. Esta opción de menú se resuelve con una sentencia SQL.
+    conexion_base_datos.consulta_listado_destinos()
     
 def modificar_destino():
     id_trayecto = int(input("\nIngrese el id trayecto que desea modificar: "))
@@ -98,43 +106,40 @@ def registrar_aeropuerto():
 def registrar_aerolínea():
     print("Por favor, ingrese los siguientes datos para registrar una nueva aerolínea:")
     nombre_aerolinea = input("Nombre de la aerolínea: ")
-    
-    # Primero se insertan los datos en la BD.
-    id_aerolinea = "" # Una consulta SQL traerá el dato.
-                
-    aerolinea = {
-        "ID aerolínea": id_aerolinea,
-        "Nombre de la aerolínea": nombre_aerolinea
-    }
 
-    skyroute_destinos[id_aerolinea] = aerolinea
+    id_aerolinea = conexion_base_datos.ingresar_aerolinea(nombre_aerolinea)
+          
+#    aerolinea = {
+#        "ID aerolínea": id_aerolinea,
+#        "Nombre de la aerolínea": nombre_aerolinea
+#    }
 
-    print(f"La aerolínea {nombre_aerolinea}") 
-    print(f"de ID: {id_aerolinea}")
+#    skyroute_destinos[id_aerolinea] = aerolinea
+
+    print(f"\nLa aerolínea {nombre_aerolinea} de ID: {id_aerolinea}") 
     print("fue ingresado correctamente.")
     
 def registrar_vuelo():
     print("Por favor, ingrese los siguientes datos para registrar un nuevo vuelo:")
-    # Hacer un insert into y traer el id_vuelo desde la BD.
-    id_vuelo = "" #Sacar comiilas después
     fecha_salida = input("Fecha de salida del vuelo: ")
     hora_salida = input("Hora de salida del vuelo: ")
     fecha_llegada = input("Fecha de llegada del vuelo: ")
     hora_llegada =  input("Hora de llegada del vuelo: ")
     id_trayecto = input("Ingrese el ID trayecto: ")
     id_aerolinea = input ("Ingrese el ID aerolínea: ")
-                
-    vuelo = {
-        "ID vuelo": id_vuelo,
-        "Fecha de salida": fecha_salida,
-        "Hora de salida": hora_salida,
-        "Fecha de llegada": fecha_llegada,
-        "Hora de llegada": hora_llegada,
-        "ID trayecto": id_trayecto,
-        "ID aerolínea": id_aerolinea
-    }
+    id_vuelo = conexion_base_datos.ingresar_vuelo(id_trayecto, id_aerolinea, fecha_salida, hora_salida, fecha_llegada, hora_llegada)
 
-    skyroute_destinos[id_vuelo] = vuelo
+#    vuelo = {
+#        "ID vuelo": id_vuelo,
+#        "Fecha de salida": fecha_salida,
+#        "Hora de salida": hora_salida,
+#        "Fecha de llegada": fecha_llegada,
+#        "Hora de llegada": hora_llegada,
+#        "ID trayecto": id_trayecto,
+#        "ID aerolínea": id_aerolinea
+#    }
+
+#    skyroute_destinos[id_vuelo] = vuelo
 
     print(f"El vuelo con ID {id_vuelo},") 
     print(f"con fecha y hora de salida: {fecha_salida}, {hora_salida},")

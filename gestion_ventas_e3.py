@@ -1,3 +1,4 @@
+import conexion_base_datos
 from datetime import datetime
 
 skyroute_ventas={}
@@ -19,12 +20,12 @@ def registrar_venta():
     id_vuelo = input("ID vuelo: ")
     id_metodo_pago = input("Método de pago: ")
 
-    #  Hacer el INSERT INTO Y DESPUES LLAMAR A LOS SIGUIENTES DATOS CON UN SELECT.
-    id_venta = "" # Sacar comillas después. 
-    fecha_venta = "" # "Fecha venta": no se pide ingreso de datos, ya que se le asigna por defecto la fecha del día que se hizo la venta.
-    estado_venta = "" # "Estado de la venta": no se pide ingreso de datos, ya que, al registrarse una nueva venta, se le asigna por defecto el estado "Activo".
-    precio_final = "" # Sacar comillas después. Se deberá traer la info del atributo "costo base", de la tabla "Trayecto"
-    id_pasaje = "" # Sacar comillas después.
+    #  Los siguientes valores se generan automáticamente al guardarse el registro en la base de datos.
+    id_venta = ""
+    fecha_venta = ""
+    estado_venta = ""
+    precio_final = ""
+    id_pasaje = ""
 
     venta =  {
         "ID venta": id_venta,
@@ -61,36 +62,35 @@ def ver_ventas():
     print("\nSeleccionar:")
     print("1. Filtrar por cliente")
     print("2. Filtrar por destino")
-    print("3. Filtrar por estado de venta") # Consulta SQl. Consulta multitabla? O con filtros?
-    print("4. Ver listado completo") # Consulta SQL SELECT *
+    print("3. Filtrar por estado de venta")
+    print("4. Ver listado completo")
     filtrar_ventas = int(input("Indique que acción desea realizar: "))
 
     if filtrar_ventas == 1:
-        filtrar_cliente = int(input("Ingrese el ID cliente: "))
-        # Operación SQL para obtener el listado de ventas correspondiente al cliente ingresado.
+        id_cliente = int(input("Ingrese el ID cliente: "))
+        conexion_base_datos.consulta_listado_ventas_cliente(id_cliente)
     elif filtrar_ventas == 2:
-        filtrar_destino = int(input("Ingrese el ID trayecto: "))
-        # Operación SQL para obtener el listado de ventas correspondiente al destino ingresado.
+        id_trayecto = int(input("Ingrese el ID trayecto: "))
+        conexion_base_datos.consulta_listado_ventas_destino(id_trayecto)
     elif filtrar_ventas == 3:
-        filtrar_estado_venta = input("Ingrese el estado de venta (Activo/Anulado): ")
-        # Operación SQL para obtener el listado de ventas correspondiente al estado ingresado.
+        estado_venta = input("Ingrese el estado de venta (Activa/Anulada): ")
+        conexion_base_datos.consulta_listado_ventas_estado(estado_venta)
     elif filtrar_ventas == 4:
-        # Operación SQL para obtener el listado completo de ventas.
-        pass
+        conexion_base_datos.consulta_listado_ventas()
     else:
         print("Opción inválida, por favor seleccione una opción válida.")
 
 def registrar_metodo_pago():
     print("\nPor favor, ingrese los siguientes datos para registrar un método de pago:")
     nombre_metodo = input("Nombre del método de pago: ")
-    id_metodo_pago = "" # Sacar comillas después. Definir acá si será un input o si lo traerá como info de la base de datos
+    id_metodo_pago = conexion_base_datos.ingresar_metodo_pago(nombre_metodo)
                 
-    metodo_pago = {
-        "Nombre del método de pago": nombre_metodo,
-        "ID método de pago": id_metodo_pago
-    }
+#    metodo_pago = {
+#        "Nombre del método de pago": nombre_metodo,
+#        "ID método de pago": id_metodo_pago
+#    }
 
-    skyroute_ventas[id_metodo_pago] = metodo_pago
+#    skyroute_ventas[id_metodo_pago] = metodo_pago
 
     print(f"El método de pago {nombre_metodo}") 
     print(f"de ID: {id_metodo_pago}")
@@ -98,29 +98,39 @@ def registrar_metodo_pago():
 
 def boton_arrepentimiento():
     print("\nSeleccionar:")
-    print("1. Anular venta") # Consulta SQL SELECT con el ID de la venta
+    print("1. Anular venta")
     print("2. Regresar al menú principal")      
     opcion_arrepentimiento = int(input("Indique qué acción desea realizar: "))
 
     if opcion_arrepentimiento == 1:
         id_venta = int(input("Ingresar el ID de la venta a anular: "))
         print("\nEl detalle de la venta ingresada es el siguiente:")
-        for clave, valor in skyroute_ventas[id_venta].items():
-            print(f"{clave}: {valor}")
-        # Consulta SQL SELECT con el ID de la venta
-                        
+        conexion_base_datos.datos_venta(id_venta)
+        fecha_venta = conexion_base_datos.fecha_venta(id_venta)
 
-        if id_venta in skyroute_ventas[id_venta]:
-            fecha_venta = "" # Operación SQL. Pedirselo a la BD 
-            if (datetime.now() - fecha_venta).total_seconds()/60 <= 5:
-                print("La cancelación de la venta se ha realizado con éxito. La devolución del dinero se efectuará en el plazo de 60 días.")
-                # Operación SQL que cambie el estado de la venta de "Activo" a "Anulado" en la BD.
-                # Operación SQL que guarde la fecha y hora de cancelación de la venta en la BD.
-            else:
-                print("La solicitud de cancelación no puede procesarse. El plazo límite para cancelar la venta ha expirado.")
+# --------------------OPCIÓN ANULAR PASAJE - VERSIÓN CON DICCIONARIO--------------------
+
+#        if id_venta in skyroute_ventas[id_venta]:
+#            print("\nEl detalle de la venta ingresada es el siguiente:")
+#            for clave, valor in skyroute_ventas[id_venta].items():
+#                print(f"{clave}: {valor}")
+# Aunque se utilice diccionario, la operación requiere adicionalmente de consultas SQL para ser efectuada.
+#        else:
+#            print("El ID venta ingresado no corresponde a una venta existente.")
+
+        if (datetime.now() - fecha_venta).total_seconds()/60 <= 5:
+            id_pasaje = int(input("Ingresar el ID del pasaje a anular: "))
+            motivo_anulacion = input("Ingresar el motivo de anulación: ")
+
+            id_anulacion = conexion_base_datos.anular_pasaje(id_venta, id_pasaje, motivo_anulacion)
+            conexion_base_datos.cambiar_estado_venta(id_venta)
+            fecha_anulacion = conexion_base_datos.fecha_anulacion(id_anulacion)
+
+            print(f"La cancelación de la venta se ha realizado con éxito a las {fecha_anulacion}. La devolución del dinero se efectuará en el plazo de 60 días.")
+        
         else:
-            print("El ID venta ingresado no corresponde a una venta existente.")
-    
+            print("La solicitud de cancelación no puede procesarse. El plazo límite para cancelar la venta ha expirado.")
+     
     elif opcion_arrepentimiento == 2:
         pass
     
