@@ -34,6 +34,8 @@ Integrantes del grupo:
 
 # Se inicia el programa
 
+from datetime import datetime
+
 print("Bienvenidos a SkyRoute S.R.L. Booking System")
 
 # Apenas se inicia el programa, se muestra el menú principal que se ejecutará automáticamente con un bucle WHILE cada vez que se finalice una acción en los submenús.
@@ -226,6 +228,27 @@ while True:
         else:
             print("Opción inválida, por favor seleccione una opción válida.")
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     # Se plantea un submenú resultante de elegir la opción "Gestión de ventas":
 
     elif opcion_menu_principal == 3:
@@ -313,3 +336,18 @@ while True:
         print("Opción inválida, por favor seleccione una opción válida.")
         
 
+from datetime import datetime
+
+# Momento en el pasado
+momento_pasado = datetime(2025, 6, 6, 14, 30)  # Ejemplo: 6 de junio de 2025 a las 14:30
+
+# Momento actual
+ahora = datetime.now()
+
+# Diferencia de tiempo
+diferencia = ahora - momento_pasado
+
+# Convertir a minutos
+minutos = diferencia.total_seconds() // 60  # División entera para minutos exactos
+
+print(f"Pasaron {int(minutos)} minutos desde el momento pasado.")
